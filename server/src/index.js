@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// CORS
+
 const allowedOrigins = process.env.CLIENT_ORIGIN
   ? process.env.CLIENT_ORIGIN.split(",").map(s => s.trim())
   : ["http://localhost:5173"];
@@ -20,7 +20,7 @@ const allowedOrigins = process.env.CLIENT_ORIGIN
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
-// Socket.IO
+
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
@@ -36,16 +36,15 @@ io.on("connection", (socket) => {
   });
 });
 
-// Routes
+
 app.use("/api/users", userRoutes);
 app.use("/api/claim", claimRoutes);
 
-// Health check
+
 app.get("/", (_req, res) => res.send("Leaderboard API is running"));
 
 const PORT = process.env.PORT || 5000;
 
-// Seed 10 users if collection is empty
 async function seedUsersIfNeeded() {
   const count = await User.countDocuments();
   if (count === 0) {
