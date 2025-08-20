@@ -98,7 +98,7 @@ export default function App() {
         {/* Header */}
         <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-5">
           <h1 className="text-3xl font-bold text-white tracking-wide">
-            🎯 Leaderboard — Random Points
+             Leaderboard — Random Points
           </h1>
           <AddUser onAdd={handleAddUser} />
         </header>
