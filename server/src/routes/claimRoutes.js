@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
 
     const history = await ClaimHistory.create({ user: user._id, points });
 
-    // Emit updated leaderboard + new history item
+    // Emit update leaderboard + new history item
     const io = req.app.locals.io;
     const leaderboardUsers = await User.find().sort({ totalPoints: -1, name: 1 });
     io.emit("leaderboard:update", assignRanks(leaderboardUsers));
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get claim history (optionally filter by userId)
+// Get claim history
 router.get("/history", async (req, res) => {
   try {
     const { userId } = req.query;
