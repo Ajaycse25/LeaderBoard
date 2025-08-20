@@ -51,7 +51,6 @@ async function seedUsersIfNeeded() {
     const names = ["Rahul", "Kamal", "Sanak", "Anita", "Vikram", "Neha", "Arjun", "Priya", "Rohit", "Meera"];
     const docs = names.map(name => ({ name }));
     await User.insertMany(docs);
-    console.log("🌱 Seeded initial 10 users");
   }
 }
 
@@ -60,7 +59,7 @@ async function seedUsersIfNeeded() {
     await connectDB(process.env.MONGO_URI);
     await seedUsersIfNeeded();
     server.listen(PORT, () => {
-      console.log(`🚀 Server listening on http://localhost:${PORT}`);
+      console.log(` Server is running`);
     });
   } catch (err) {
     console.error("Startup error:", err);
